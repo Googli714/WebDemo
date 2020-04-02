@@ -1,0 +1,46 @@
+﻿@model  WebDemo.Models.Person
+@{
+    ViewBag.Title = "Info";
+}
+
+@using (@Html.BeginForm("Info", "Home", FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label>First Name</label>
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "სახელი" })
+        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "გვარი" })
+        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-inline">
+        @Html.RadioButtonFor(m => m.Gender, false)
+        @Html.Label("Male")
+        @Html.RadioButtonFor(m => m.Gender, true)
+        @Html.Label("Female")
+        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
+<h2>Info</h2>
+<h3>@ViewBag.Message</h3>
+<h4>
+    @{
+        string tmp;
+        if (Model.Gender) { tmp = "ქალაჩუნა"; } else { tmp = "კაცური კაცი"; }
+    }
+</h4>
+@tmp
