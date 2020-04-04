@@ -133,10 +133,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\RegistrationViewModel.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Person_Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users_Table.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -147,10 +149,12 @@
     <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\dataTables.bootstrap4.css" />
     <Content Include="Content\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\datatables.css" />
     <Content Include="Content\dataTables.foundation.css" />
     <Content Include="Content\dataTables.foundation.min.css" />
     <Content Include="Content\dataTables.jqueryui.css" />
     <Content Include="Content\dataTables.jqueryui.min.css" />
+    <Content Include="Content\datatables.min.css" />
     <Content Include="Content\dataTables.semanticui.css" />
     <Content Include="Content\dataTables.semanticui.min.css" />
     <Content Include="Content\jquery.dataTables.css" />
@@ -179,6 +183,8 @@
     <Content Include="Scripts\dataTables.foundation.min.js" />
     <Content Include="Scripts\dataTables.jqueryui.js" />
     <Content Include="Scripts\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\datatables.js" />
+    <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\dataTables.semanticui.js" />
     <Content Include="Scripts\dataTables.semanticui.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

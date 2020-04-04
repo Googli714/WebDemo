@@ -13,9 +13,15 @@ namespace WebDemo
         }
 
         public virtual DbSet<Person_Table> Person_Table { get; set; }
+        public virtual DbSet<Users_Table> Users_Table { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Person_Table>()
+                .HasMany(e => e.Users_Table)
+                .WithRequired(e => e.Person_Table)
+                .HasForeignKey(e => e.PersonId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

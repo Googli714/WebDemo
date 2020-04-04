@@ -28,34 +28,39 @@ namespace WebDemo.Controllers
         [HttpGet]
         public ActionResult Info()
         {
-            Person p = new Person();
+            RegistrationViewModel p = new RegistrationViewModel();
             return View(p);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Info(Person p)
+        public ActionResult Info(RegistrationViewModel p)
         {
             ViewBag.Message = p.FirstName + " " + p.LastName;
             Context Pmodel = new Context();
             Pmodel.Person_Table.Add(new Person_Table { FirstName = p.FirstName, LastName = p.LastName, Gender = p.Gender});
             Pmodel.SaveChanges();
-            return View(p);
+            return RedirectToAction("Get_Grid", "Home");
         }
+
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public ActionResult Get_Grid()
         {
             PersonViewModel personview = new PersonViewModel();
-            personview.persons = new List<Person>();
+            personview.persons = new List<PersonModel>();
             Context Pmodel = new Context();
             foreach (Person_Table person in Pmodel.Person_Table)
             {
-                Person tmp = new Person(person.FirstName, person.LastName, person.Gender);
+                PersonModel tmp = new PersonModel(person.FirstName, person.LastName, person.Gender);
                 personview.persons.Add(tmp);
             }
             return View(personview);
         }
+
+        //[HttpGet]
+        //public ActionResult
+
+
 
 
     }

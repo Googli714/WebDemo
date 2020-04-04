@@ -8,6 +8,12 @@ namespace WebDemo
 
     public partial class Person_Table
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Person_Table()
+        {
+            Users_Table = new HashSet<Users_Table>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -17,5 +23,8 @@ namespace WebDemo
         public string LastName { get; set; }
 
         public bool Gender { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users_Table> Users_Table { get; set; }
     }
 }
