@@ -26,8 +26,11 @@ namespace WebDemo
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/jquery.validate.min.js/"));
-            bundles.Add(new ScriptBundle("~/Scripts/jquery.validate.unobtrusive.min.js/"));
+            bundles.Add(new ScriptBundle("~/bundles/validate").Include(
+                "~/Scripts/jquery.validate.min.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js"));
+
+      
 
         }
     }

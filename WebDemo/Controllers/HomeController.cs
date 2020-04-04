@@ -43,6 +43,7 @@ namespace WebDemo.Controllers
             return View(p);
         }
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public ActionResult Get_Grid()
         {
             PersonViewModel personview = new PersonViewModel();

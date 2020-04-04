@@ -5,7 +5,6 @@
 
 @using (@Html.BeginForm("Info", "Home", FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
 {
-    @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
     HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
 
@@ -27,7 +26,6 @@
         @Html.Label("Male")
         @Html.RadioButtonFor(m => m.Gender, true)
         @Html.Label("Female")
-        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
     </div>
 
 
