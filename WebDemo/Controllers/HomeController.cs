@@ -61,6 +61,10 @@ namespace WebDemo.Controllers
             }
             return View(personview);
         }
+        public ActionResult Edit(int Id)
+        {
+            return View();
+        }
 
         //[HttpGet]
         //public ActionResult

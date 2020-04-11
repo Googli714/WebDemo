@@ -16,6 +16,7 @@ namespace WebDemo.Models
         public string LastName { get; set; }
         public string Username { get; set; }
         public bool Gender { get; set; }
+        public int Id { get; set; }
 
         public PersonModel() { }
 

@@ -10,13 +10,14 @@
     });
 </script>
 
-<table id="myTable" class="table table-striped table-bordered">
+<table id="myTable" class="table table-striped table-bordered ">
     <thead>
         <tr>
             <th>სახელი</th>
             <th>გვარი</th>
             <th>სქესი</th>
             <th>მომხმარებელი</th>
+            <th>ოპერაციები</th>
         </tr>
     </thead>
 
@@ -29,6 +30,7 @@
                 @{string tmp = person.Gender ? "Female" : "Male";}
                 <td>@tmp</td>
                 <td>@person.Username</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Home", new { Id = person.Id })</td>
             </tr>
         }
     </tbody>
