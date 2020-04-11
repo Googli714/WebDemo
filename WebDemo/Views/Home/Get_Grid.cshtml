@@ -1,0 +1,44 @@
+﻿@model WebDemo.Models.PersonViewModel
+@{
+    ViewBag.Title = "Get_Grid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+<table id="myTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>სახელი</th>
+            <th>გვარი</th>
+            <th>სქესი</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var person in Model.persons)
+        {
+            <tr>
+                <td>@person.FirstName</td>
+                <td>@person.LastName</td>
+                @{string tmp = person.Gender ? "Female" : "Male";}
+                <td>@tmp</td>
+            </tr>
+        }
+    </tbody>
+
+
+
+
+</table>
+
+
+
+
+<h2>Get_Grid</h2>
+
+
