@@ -5,4 +5,13 @@
 }
 
 <h2>Edit</h2>
+@model WebDemo.Models.RegistrationViewModel
+@using (Html.BeginForm("NextEdit", "Head", FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+    @Html.Partial("_HeadBody", Model, new ViewDataDictionary { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "CardModel" } })
 
+
+}

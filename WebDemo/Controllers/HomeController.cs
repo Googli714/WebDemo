@@ -64,16 +64,11 @@ namespace WebDemo.Controllers
         }
         public ActionResult Edit(int Id)
         {
-            return View();
+            Context context = new Context();
+            Person_Table pw = context.Person_Table.Where(p => p.Id == Id).FirstOrDefault();
+            Users_Table ut = context.Users_Table.Where(p => p.Id == Id).FirstOrDefault();
+            RegistrationViewModel rw = new RegistrationViewModel(ut.Username, ut.Password, ut.Email, pw.FirstName, pw.LastName, pw.Gender);
+            return View(rw);
         }
-
-        public ActionResult Edit(int Id)
-        {
-            
-        }
-
-
-
-
     }
 }
