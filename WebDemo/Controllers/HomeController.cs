@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using WebDemo.Models;
 using System.Linq;
+using System.Data;
 
 namespace WebDemo.Controllers
 {
@@ -62,8 +63,10 @@ namespace WebDemo.Controllers
             return View(personview);
         }
 
-        //[HttpGet]
-        //public ActionResult
+        public ActionResult Edit(int Id)
+        {
+            
+        }
 
 
 
