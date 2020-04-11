@@ -14,15 +14,17 @@ namespace WebDemo.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Username { get; set; }
         public bool Gender { get; set; }
 
         public PersonModel() { }
 
-        public PersonModel(string fn, string ln, bool g)
+        public PersonModel(string fn, string ln, bool g, string pp)
         {
             FirstName = fn;
             LastName = ln;
             Gender = g;
+            Username = pp;
         }
     }
 }

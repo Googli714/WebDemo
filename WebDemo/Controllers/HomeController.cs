@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using WebDemo.Models;
+using System.Linq;
 
 namespace WebDemo.Controllers
 {
@@ -38,7 +39,11 @@ namespace WebDemo.Controllers
         {
             ViewBag.Message = p.FirstName + " " + p.LastName;
             Context Pmodel = new Context();
-            Pmodel.Person_Table.Add(new Person_Table { FirstName = p.FirstName, LastName = p.LastName, Gender = p.Gender});
+            Users_Table users = new Users_Table { Username = p.Username, Password=p.Password, Email = p.Email };
+            List<Users_Table> userlist = new List<Users_Table>();
+            userlist.Add(users);
+            //Pmodel.Users_Table.Add(users);
+            Pmodel.Person_Table.Add(new Person_Table { FirstName = p.FirstName, LastName = p.LastName, Gender = p.Gender, Users_Table = userlist});
             Pmodel.SaveChanges();
             return RedirectToAction("Get_Grid", "Home");
         }
@@ -47,11 +52,11 @@ namespace WebDemo.Controllers
         public ActionResult Get_Grid()
         {
             PersonViewModel personview = new PersonViewModel();
-            personview.persons = new List<PersonModel>();
+            personview.persons = new List<PersonModel>(); 
             Context Pmodel = new Context();
             foreach (Person_Table person in Pmodel.Person_Table)
             {
-                PersonModel tmp = new PersonModel(person.FirstName, person.LastName, person.Gender);
+                PersonModel tmp = new PersonModel(person.FirstName, person.LastName, person.Gender, person.Users_Table == null || person.Users_Table.Count == 0 ? "" : person.Users_Table.FirstOrDefault().Username);
                 personview.persons.Add(tmp);
             }
             return View(personview);

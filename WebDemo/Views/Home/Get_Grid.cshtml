@@ -16,6 +16,7 @@
             <th>სახელი</th>
             <th>გვარი</th>
             <th>სქესი</th>
+            <th>მომხმარებელი</th>
         </tr>
     </thead>
 
@@ -27,6 +28,7 @@
                 <td>@person.LastName</td>
                 @{string tmp = person.Gender ? "Female" : "Male";}
                 <td>@tmp</td>
+                <td>@person.Username</td>
             </tr>
         }
     </tbody>
