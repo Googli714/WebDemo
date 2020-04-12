@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm("", "", FormMethod.Post, new { id = "myform" }))
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { id = "myform" }))
 {
     @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()

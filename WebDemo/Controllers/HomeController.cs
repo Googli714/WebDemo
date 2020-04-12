@@ -70,6 +70,7 @@ namespace WebDemo.Controllers
             Users_Table ut = pt.Users_Table.FirstOrDefault() == null ? new Users_Table() : pt.Users_Table.FirstOrDefault();
             RegistrationViewModel rvm = new RegistrationViewModel
             {
+                Id = pt.Id,
                 Email = ut.Email,
                 FirstName = pt.FirstName,
                 Gender = pt.Gender,
