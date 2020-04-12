@@ -30,7 +30,7 @@
                 @{string tmp = person.Gender ? "Female" : "Male";}
                 <td>@tmp</td>
                 <td>@person.Username</td>
-                <td>@Html.ActionLink("Edit", "Edit", "Home", new { Id = person.Id })</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Home", new {Id = person.Id }, null)</td>
             </tr>
         }
     </tbody>

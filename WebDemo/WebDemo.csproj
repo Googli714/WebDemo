@@ -217,6 +217,8 @@
     <Content Include="Views\Home\Info.cshtml" />
     <Content Include="Views\Home\Get_Grid.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Home\_RegistrationBody.cshtml" />
+    <Content Include="Views\Home\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
