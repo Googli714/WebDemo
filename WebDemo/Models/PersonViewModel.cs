@@ -20,8 +20,9 @@ namespace WebDemo.Models
 
         public PersonModel() { }
 
-        public PersonModel(string fn, string ln, bool g, string pp)
+        public PersonModel(int id, string fn, string ln, bool g, string pp)
         {
+            Id = id;
             FirstName = fn;
             LastName = ln;
             Gender = g;

@@ -1,4 +1,4 @@
-﻿
+﻿@model  WebDemo.Models.RegistrationViewModel
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,4 +14,13 @@
     @Html.Partial("_HeadBody", Model, new ViewDataDictionary { TemplateInfo = new TemplateInfo() { HtmlFieldPrefix = "CardModel" } })
 
 
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { id = "myform" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+
+    @Html.Partial("_RegistrationBody", Model)
+
 }
+
