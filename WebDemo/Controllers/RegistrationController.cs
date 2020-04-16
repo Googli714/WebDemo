@@ -6,7 +6,7 @@ using System.Data;
 
 namespace WebDemo.Controllers
 {
-    public class HomeController : Controller
+    public class RegistrationController : Controller
     {
         #region example MVC
         //public ActionResult Index()
@@ -47,11 +47,11 @@ namespace WebDemo.Controllers
             //Pmodel.Users_Table.Add(users);
             Pmodel.Person_Table.Add(new Person_Table { FirstName = p.FirstName, LastName = p.LastName, Gender = p.Gender, Users_Table = userlist });
             Pmodel.SaveChanges();
-            return RedirectToAction("Get_Grid", "Home");
+            return RedirectToAction("GetList", "Registration");
         }
 
         [HttpGet]
-        public ActionResult Get_Grid()
+        public ActionResult GetList()
         {
             PersonViewModel personview = new PersonViewModel();
             personview.persons = new List<PersonModel>();
@@ -65,11 +65,6 @@ namespace WebDemo.Controllers
         }
         public ActionResult Edit(int Id)
         {
-            Context context = new Context();
-            Person_Table pw = context.Person_Table.Where(p => p.Id == Id).FirstOrDefault();
-            Users_Table ut = context.Users_Table.Where(p => p.Id == Id).FirstOrDefault();
-            RegistrationViewModel rw = new RegistrationViewModel(ut.Username, ut.Password, ut.Email, pw.FirstName, pw.LastName, pw.Gender);
-            return View(rw);
             Context context = new Context();
             Person_Table pt = context.Person_Table.Where(o => o.Id == Id).FirstOrDefault();
             Users_Table ut = pt.Users_Table.FirstOrDefault() == null ? new Users_Table() : pt.Users_Table.FirstOrDefault();
@@ -88,11 +83,18 @@ namespace WebDemo.Controllers
         [HttpPost]
         public ActionResult Edit(RegistrationViewModel rvm)
         {
-            return RedirectToAction("Get_Grid", "Home");
+            Context context = new Context();
+            Person_Table pt = context.Person_Table.Where(u => u.Id == rvm.Id).FirstOrDefault();
+            Users_Table ut = pt.Users_Table.FirstOrDefault() == null ? new Users_Table() : pt.Users_Table.FirstOrDefault();
+            ut.Username = rvm.Username;
+            ut.Password = rvm.Password;
+            ut.Email = rvm.Email;
+            pt.FirstName = rvm.FirstName;
+            pt.LastName = rvm.LastName;
+            pt.Gender = rvm.Gender;
+            pt.Users_Table.Add(ut);
+            context.SaveChanges();
+            return RedirectToAction("GetList", "Registration");
         }
-
-
-
-
     }
 }

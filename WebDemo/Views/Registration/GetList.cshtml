@@ -1,6 +1,6 @@
 ﻿@model WebDemo.Models.PersonViewModel
 @{
-    ViewBag.Title = "Get_Grid";
+    ViewBag.Title = "GetList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,7 +30,7 @@
                 @{string tmp = person.Gender ? "Female" : "Male";}
                 <td>@tmp</td>
                 <td>@person.Username</td>
-                <td>@Html.ActionLink("Edit", "Edit", "Home", new {Id = person.Id }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Registration", new {Id = person.Id }, null)</td>
             </tr>
         }
     </tbody>
@@ -43,6 +43,6 @@
 
 
 
-<h2>Get_Grid</h2>
+<h2>GetList</h2>
 
 
