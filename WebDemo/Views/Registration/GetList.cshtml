@@ -9,7 +9,18 @@
         $('#myTable').DataTable();
     });
 </script>
-
+<div>
+    @using (Html.BeginForm("GetList", "Registration", FormMethod.Post, new { id = "myform" }))
+    {
+        @Html.TextBoxFor(m => m.FilterPerson.Username, new { @class = "form-control", @placeholder = "მომხმარებლი" });
+        @Html.TextBoxFor(m => m.FilterPerson.FirstName, new { @class = "form-control", @placeholder = "სახელი" });
+        @Html.TextBoxFor(m => m.FilterPerson.LastName, new { @class = "form-control", @placeholder = "გვარი" });
+        @Html.DropDownListFor(m => m.FilterPerson.Gender, Model.genderlist, "-select-")
+        @Html.AntiForgeryToken()
+        HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+        <button type="submit">SORT</button>
+    }
+</div>
 <table id="myTable" class="table table-striped table-bordered ">
     <thead>
         <tr>
@@ -27,7 +38,7 @@
             <tr>
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
-                @{string tmp = person.Gender ? "Female" : "Male";}
+                @{string tmp = person.Gender.GetValueOrDefault() ? "Female" : "Male";}
                 <td>@tmp</td>
                 <td>@person.Username</td>
                 <td>@Html.ActionLink("Edit", "Edit", "Registration", new {Id = person.Id }, null)</td>

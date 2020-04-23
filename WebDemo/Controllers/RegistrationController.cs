@@ -49,7 +49,6 @@ namespace WebDemo.Controllers
             Pmodel.SaveChanges();
             return RedirectToAction("GetList", "Registration");
         }
-
         [HttpGet]
         public ActionResult GetList()
         {
@@ -61,7 +60,31 @@ namespace WebDemo.Controllers
                 PersonModel tmp = new PersonModel(person.Id, person.FirstName, person.LastName, person.Gender, person.Users_Table == null || person.Users_Table.Count == 0 ? "" : person.Users_Table.FirstOrDefault().Username);
                 personview.persons.Add(tmp);
             }
+            personview.genderlist = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "კაცი", Value = "True" },
+                new SelectListItem { Text = "ქალი", Value = "False" }
+            };
             return View(personview);
+        }
+        [HttpPost]
+        public ActionResult GetList(PersonViewModel pvm)
+        {
+            PersonModel filter = pvm.FilterPerson;
+            Person_Table pt = new Person_Table();
+            Context context = new Context();
+            var persons = context.Person_Table.Where(x => filter.FirstName == null ? true : x.FirstName == filter.FirstName
+                && filter.LastName == null ? true : x.LastName == filter.LastName
+                && filter.Gender == null ? true : x.Gender == filter.Gender);
+                //&& filter.Username == null ? true : x.Users_Table.FirstOrDefault().Username == filter.Username).ToList();
+            PersonViewModel k = new PersonViewModel();
+            foreach (Person_Table person in persons)
+            {
+                PersonModel tmp = new PersonModel(person.Id, person.FirstName, person.LastName, person.Gender, person.Users_Table == null || person.Users_Table.Count == 0 ? "" : person.Users_Table.FirstOrDefault().Username);
+                k.persons.Add(tmp);
+            }
+
+            return View(k);
         }
         public ActionResult Edit(int Id)
         {
