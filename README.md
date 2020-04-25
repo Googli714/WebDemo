@@ -1,3 +1,2 @@
 # WebDemo
-"U Simp - U Lose"
-      -UnstableSlayer
+"U Simp - U Lose" - UnstableSlayer
