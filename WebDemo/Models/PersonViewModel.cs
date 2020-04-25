@@ -9,7 +9,15 @@ namespace WebDemo.Models
 {
     public class PersonViewModel
     {
-        public PersonViewModel() { persons = new List<PersonModel>(); }
+        public PersonViewModel()
+        {
+            persons = new List<PersonModel>();
+            genderlist = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "კაცი", Value = "false" },
+                new SelectListItem { Text = "ქალი", Value = "true" }
+            };
+        }
         public List<PersonModel> persons { get; set; }
         public PersonModel FilterPerson { get; set; }
         public IEnumerable<SelectListItem> genderlist { get; set; }

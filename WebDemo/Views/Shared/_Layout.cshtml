@@ -27,8 +27,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Register", "Add", "Registration")</li>
-                    <li>@Html.ActionLink("View Persons", "GetList", "Registration")</li>
+                    <li>@Html.ActionLink("რეგისტრაცია", "Add", "Registration")</li>
+                    <li>@Html.ActionLink("მომხმარებლები", "GetList", "Registration")</li>
+                </ul>
+
+                <ul class="nav navbar-nav" style="float:right;">
+                    <li>@Html.ActionLink("გამოსვლა", "LogOff", "Account")</li>                    
                 </ul>
             </div>
         </div>

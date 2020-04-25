@@ -1,6 +1,6 @@
 USE [PersonDB]
 GO
-/****** Object:  Table [dbo].[Person_Table]    Script Date: 4/11/2020 12:57:01 ******/
+/****** Object:  Table [dbo].[Person_Table]    Script Date: 4/24/2020 11:12:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -13,10 +13,24 @@ CREATE TABLE [dbo].[Person_Table](
  CONSTRAINT [PK_Person_Table] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users_Table]    Script Date: 4/11/2020 12:57:01 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 4/24/2020 11:12:38 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users_Table]    Script Date: 4/24/2020 11:12:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,10 +41,11 @@ CREATE TABLE [dbo].[Users_Table](
 	[Password] [nvarchar](max) NOT NULL,
 	[Email] [nvarchar](max) NOT NULL,
 	[PersonId] [int] NOT NULL,
+	[RoleId] [int] NULL,
  CONSTRAINT [PK_Users_Table] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 SET IDENTITY_INSERT [dbo].[Person_Table] ON 
@@ -47,10 +62,33 @@ INSERT [dbo].[Person_Table] ([Id], [FirstName], [LastName], [Gender]) VALUES (5,
 GO
 INSERT [dbo].[Person_Table] ([Id], [FirstName], [LastName], [Gender]) VALUES (6, N'luka', N'chikadze', 0)
 GO
+INSERT [dbo].[Person_Table] ([Id], [FirstName], [LastName], [Gender]) VALUES (7, N'saba', N'devnozashvili', 0)
+GO
 SET IDENTITY_INSERT [dbo].[Person_Table] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Roles] ON 
+GO
+INSERT [dbo].[Roles] ([Id], [Name]) VALUES (1, N'Administrator')
+GO
+INSERT [dbo].[Roles] ([Id], [Name]) VALUES (2, N'Guest')
+GO
+INSERT [dbo].[Roles] ([Id], [Name]) VALUES (3, N'Editor')
+GO
+SET IDENTITY_INSERT [dbo].[Roles] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users_Table] ON 
+GO
+INSERT [dbo].[Users_Table] ([Id], [Username], [Password], [Email], [PersonId], [RoleId]) VALUES (1, N'sdevnozashvili', N'123', N'dfa@dfas.com', 7, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Users_Table] OFF
 GO
 ALTER TABLE [dbo].[Users_Table]  WITH CHECK ADD  CONSTRAINT [FK_Users_Table_Person_Table] FOREIGN KEY([PersonId])
 REFERENCES [dbo].[Person_Table] ([Id])
 GO
 ALTER TABLE [dbo].[Users_Table] CHECK CONSTRAINT [FK_Users_Table_Person_Table]
+GO
+ALTER TABLE [dbo].[Users_Table]  WITH CHECK ADD  CONSTRAINT [FK_Users_Table_Roles] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Roles] ([Id])
+GO
+ALTER TABLE [dbo].[Users_Table] CHECK CONSTRAINT [FK_Users_Table_Roles]
 GO
