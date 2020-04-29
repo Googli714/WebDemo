@@ -21,6 +21,10 @@ namespace WebDemo
 
         public int PersonId { get; set; }
 
+        public int? RoleId { get; set; }
+
         public virtual Person_Table Person_Table { get; set; }
+
+        public virtual Role Role { get; set; }
     }
 }

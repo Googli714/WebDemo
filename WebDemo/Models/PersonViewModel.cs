@@ -14,8 +14,8 @@ namespace WebDemo.Models
             persons = new List<PersonModel>();
             genderlist = new List<SelectListItem>()
             {
-                new SelectListItem { Text = "კაცი", Value = "False" },
-                new SelectListItem { Text = "ქალი", Value = "True" }
+                new SelectListItem { Text = "კაცი", Value = "false" },
+                new SelectListItem { Text = "ქალი", Value = "true" }
             };
         }
         public List<PersonModel> persons { get; set; }

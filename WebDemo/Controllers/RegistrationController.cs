@@ -3,9 +3,11 @@ using System.Web.Mvc;
 using WebDemo.Models;
 using System.Linq;
 using System.Data;
+using WebDemo.Filters;
 
 namespace WebDemo.Controllers
 {
+    [CustomAuthenticationFilter]
     public class RegistrationController : Controller
     {
         #region example MVC
@@ -29,6 +31,7 @@ namespace WebDemo.Controllers
         //}
         #endregion
         [HttpGet]
+        [CustomAuthorize("Administrator")]
         public ActionResult Add()
         {
             RegistrationViewModel p = new RegistrationViewModel();
@@ -37,6 +40,7 @@ namespace WebDemo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize("Administrator")]
         public ActionResult Add(RegistrationViewModel p)
         {
             ViewBag.Message = p.FirstName + " " + p.LastName;
@@ -50,6 +54,7 @@ namespace WebDemo.Controllers
             return RedirectToAction("GetList", "Registration");
         }
         [HttpGet]
+        [CustomAuthorize("Administrator", "Editor", "Guest")]
         public ActionResult GetList()
         {
             PersonViewModel personview = new PersonViewModel();
@@ -60,19 +65,19 @@ namespace WebDemo.Controllers
                 PersonModel tmp = new PersonModel(person.Id, person.FirstName, person.LastName, person.Gender, person.Users_Table == null || person.Users_Table.Count == 0 ? "" : person.Users_Table.FirstOrDefault().Username);
                 personview.persons.Add(tmp);
             }
-            
             return View(personview);
         }
         [HttpPost]
+        [CustomAuthorize("Administrator", "Editor", "Guest")]
         public ActionResult GetList(PersonViewModel pvm)
         {
             PersonModel filter = pvm.FilterPerson;
             Person_Table pt = new Person_Table();
             Context context = new Context();
-            var persons = context.Person_Table.Where(x =>(filter.FirstName == null ? true : x.FirstName.Contains(filter.FirstName))
+            var persons = context.Person_Table.Where(x => (filter.FirstName == null ? true : x.FirstName.Contains(filter.FirstName))
                 && (filter.LastName == null ? true : x.LastName.Contains(filter.LastName))
                 && (filter.Gender == null ? true : x.Gender == filter.Gender)
-                && (filter.Username == null ? true : x.Users_Table.FirstOrDefault().Username.Contains(filter.Username))).ToList();
+                && (filter.Username == null ? true : x.Users_Table.FirstOrDefault().Username.Contains(filter.Username)));
             PersonViewModel k = new PersonViewModel();
             foreach (Person_Table person in persons)
             {
@@ -82,6 +87,7 @@ namespace WebDemo.Controllers
 
             return View(k);
         }
+        [CustomAuthorize("Administrator", "Editor")]
         public ActionResult Edit(int Id)
         {
             Context context = new Context();
@@ -100,6 +106,7 @@ namespace WebDemo.Controllers
             return View(rvm);
         }
         [HttpPost]
+        [CustomAuthorize("Administrator", "Editor")]
         public ActionResult Edit(RegistrationViewModel rvm)
         {
             Context context = new Context();
