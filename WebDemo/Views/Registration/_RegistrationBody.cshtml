@@ -20,7 +20,7 @@
     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "ემაილი" })
     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 </div>
-
+ 
 <div class="form-group">
     <label>First Name</label>
     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "სახელი" })
@@ -38,6 +38,12 @@
     @Html.Label("Male")
     @Html.RadioButtonFor(m => m.Gender, true)
     @Html.Label("Female")
+</div>
+<div class="form-group">
+    @if (Convert.ToInt32(Session["RoleId"]) == 1)
+    {
+        @Html.DropDownListFor(x => x.RoleID, Model.RoleList, "Choose Role");
+    }
 </div>
 
 

@@ -30,6 +30,7 @@ namespace WebDemo.Controllers
                     {
                         Session["UserName"] = user.Username;
                         Session["UserId"] = user.Id;
+                        Session["RoleId"] = user.RoleId;
                         return RedirectToAction("GetList", "Registration");
                     }
                     else

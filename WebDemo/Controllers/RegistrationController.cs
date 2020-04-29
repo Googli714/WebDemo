@@ -45,7 +45,7 @@ namespace WebDemo.Controllers
         {
             ViewBag.Message = p.FirstName + " " + p.LastName;
             Context Pmodel = new Context();
-            Users_Table users = new Users_Table { Username = p.Username, Password = p.Password, Email = p.Email };
+            Users_Table users = new Users_Table { Username = p.Username, Password = p.Password, Email = p.Email, RoleId = p.RoleID};
             List<Users_Table> userlist = new List<Users_Table>();
             userlist.Add(users);
             //Pmodel.Users_Table.Add(users);
@@ -100,7 +100,8 @@ namespace WebDemo.Controllers
                 FirstName = pt.FirstName,
                 Gender = pt.Gender,
                 LastName = pt.LastName,
-                Username = ut.Username
+                Username = ut.Username,
+                RoleID = ut.RoleId
             };
 
             return View(rvm);
@@ -115,6 +116,7 @@ namespace WebDemo.Controllers
             ut.Username = rvm.Username;
             ut.Password = rvm.Password;
             ut.Email = rvm.Email;
+            ut.RoleId = rvm.RoleID;
             pt.FirstName = rvm.FirstName;
             pt.LastName = rvm.LastName;
             pt.Gender = rvm.Gender;

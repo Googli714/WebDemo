@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace WebDemo.Models
 {
@@ -19,10 +21,21 @@ namespace WebDemo.Models
         public string Password { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
+        public int? RoleID { get; set; }
+        public IEnumerable<SelectListItem> RoleList { get; set; }
 
-        public RegistrationViewModel(){ }
+        public RegistrationViewModel()
+        {
+            RoleList = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Guest", Value = "2"},
+                new SelectListItem { Text = "Editor", Value = "3"},
+                new SelectListItem { Text = "Admin", Value = "1"}
+            };
+        }
 
-        public RegistrationViewModel(string un, string pw, string email, string f, string l, bool g)
+        public RegistrationViewModel(string un, string pw, string email, string f, string l, bool g, int r)
         {
             Username = un;
             Password = pw;
@@ -30,6 +43,7 @@ namespace WebDemo.Models
             FirstName = f;
             LastName = l;
             Gender = g;
+            RoleID = r;
         }
     }
 }
