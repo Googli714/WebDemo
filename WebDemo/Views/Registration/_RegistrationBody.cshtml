@@ -40,6 +40,20 @@
     @Html.Label("Female")
 </div>
 
+<div class="form-group">
+    @{
+        IEnumerable<SelectListItem> Rolelist;
+        Rolelist = new List<SelectListItem>()
+        {
+            new SelectListItem { Text = "administrator", Value = "1" },
+            new SelectListItem { Text = "Guest", Value = "2" },
+            new SelectListItem { Text = "Editor", Value = "3" }
+        };
+    }
+    @Html.DropDownListFor(m => m.RoleId, Rolelist, "-select-", new { @class = "btn btn-danger dropdown-toggle" })
+    @Html.ValidationMessageFor(m => m.RoleId, "", new { @class = "text-danger" })
+</div>
 
-
-<button type="submit" class="btn btn-primary">Submit</button>
+<div class="form-inline">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>

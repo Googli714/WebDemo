@@ -5,6 +5,7 @@ namespace WebDemo.Models
     public class RegistrationViewModel
     {
         public int Id { get; set; }
+
         [Required]
         public string FirstName { get; set; }
 
@@ -13,16 +14,24 @@ namespace WebDemo.Models
 
         [Required]
         public bool Gender { get; set; }
+
         [Required]
         public string Username { get; set; }
+
         [Required]
         public string Password { get; set; }
+
         [Required]
         public string Email { get; set; }
 
-        public RegistrationViewModel(){ }
+        [Required]
+        public int RoleId { get; set; }
 
-        public RegistrationViewModel(string un, string pw, string email, string f, string l, bool g)
+        public RegistrationViewModel()
+        {
+        }
+
+        public RegistrationViewModel(string un, string pw, string email, string f, string l, bool g, int roleid)
         {
             Username = un;
             Password = pw;
@@ -30,6 +39,7 @@ namespace WebDemo.Models
             FirstName = f;
             LastName = l;
             Gender = g;
+            RoleId = roleid;
         }
     }
 }

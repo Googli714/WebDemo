@@ -1,35 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using WebDemo.Models;
-using System.Linq;
 using System.Data;
+using System.Linq;
+using System.Web.Mvc;
 using WebDemo.Filters;
+using WebDemo.Models;
 
 namespace WebDemo.Controllers
 {
     [CustomAuthenticationFilter]
     public class RegistrationController : Controller
     {
-        #region example MVC
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
-        #endregion
         [HttpGet]
         [CustomAuthorize("Administrator")]
         public ActionResult Add()
@@ -45,7 +25,7 @@ namespace WebDemo.Controllers
         {
             ViewBag.Message = p.FirstName + " " + p.LastName;
             Context Pmodel = new Context();
-            Users_Table users = new Users_Table { Username = p.Username, Password = p.Password, Email = p.Email };
+            Users_Table users = new Users_Table { Username = p.Username, Password = p.Password, Email = p.Email, RoleId = p.RoleId };
             List<Users_Table> userlist = new List<Users_Table>();
             userlist.Add(users);
             //Pmodel.Users_Table.Add(users);
@@ -53,6 +33,7 @@ namespace WebDemo.Controllers
             Pmodel.SaveChanges();
             return RedirectToAction("GetList", "Registration");
         }
+
         [HttpGet]
         [CustomAuthorize("Administrator", "Editor", "Guest")]
         public ActionResult GetList()
@@ -67,6 +48,7 @@ namespace WebDemo.Controllers
             }
             return View(personview);
         }
+
         [HttpPost]
         [CustomAuthorize("Administrator", "Editor", "Guest")]
         public ActionResult GetList(PersonViewModel pvm)
@@ -87,6 +69,7 @@ namespace WebDemo.Controllers
 
             return View(k);
         }
+
         [CustomAuthorize("Administrator", "Editor")]
         public ActionResult Edit(int Id)
         {
@@ -100,11 +83,13 @@ namespace WebDemo.Controllers
                 FirstName = pt.FirstName,
                 Gender = pt.Gender,
                 LastName = pt.LastName,
-                Username = ut.Username
+                Username = ut.Username,
+                RoleId = ut.RoleId == null ? 2 : (int)ut.RoleId
             };
 
             return View(rvm);
         }
+
         [HttpPost]
         [CustomAuthorize("Administrator", "Editor")]
         public ActionResult Edit(RegistrationViewModel rvm)
@@ -118,6 +103,7 @@ namespace WebDemo.Controllers
             pt.FirstName = rvm.FirstName;
             pt.LastName = rvm.LastName;
             pt.Gender = rvm.Gender;
+            ut.RoleId = rvm.RoleId;
             pt.Users_Table.Add(ut);
             context.SaveChanges();
             return RedirectToAction("GetList", "Registration");

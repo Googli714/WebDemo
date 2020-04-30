@@ -5,10 +5,10 @@
 }
 
 @*<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable();
-    });
-</script>*@
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>*@
 
 <script type="text/javascript">
     $.extend(true, $.fn.dataTable.defaults, {
@@ -61,19 +61,10 @@
                 @{string tmp = person.Gender.GetValueOrDefault() ? "Female" : "Male";}
                 <td>@tmp</td>
                 <td>@person.Username</td>
-                <td>@Html.ActionLink("Edit", "Edit", "Registration", new {Id = person.Id }, null)</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Registration", new { Id = person.Id }, null)</td>
             </tr>
         }
     </tbody>
-
-
-
-
 </table>
 
-
-
-
 <h2>GetList</h2>
-
-

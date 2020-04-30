@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace WebDemo.Models
@@ -18,6 +14,7 @@ namespace WebDemo.Models
                 new SelectListItem { Text = "ქალი", Value = "true" }
             };
         }
+
         public List<PersonModel> persons { get; set; }
         public PersonModel FilterPerson { get; set; }
         public IEnumerable<SelectListItem> genderlist { get; set; }
@@ -31,7 +28,9 @@ namespace WebDemo.Models
         public bool? Gender { get; set; }
         public int Id { get; set; }
 
-        public PersonModel() { }
+        public PersonModel()
+        {
+        }
 
         public PersonModel(int id, string fn, string ln, bool g, string pp)
         {
